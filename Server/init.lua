@@ -23,10 +23,10 @@ sv = net.createServer(net.TCP)
 sv:listen(80, function(conn)
     conn:on("receive", function(conn, dadoRecebido) 
         if (dadoRecebido == "LEDG") then
-            gpio.write(LEDG, gpio.OUTPUT);
+            gpio.write(LEDG, gpio.HIGH);
             gpio.write(LEDR, gpio.LOW);
         elseif (dadoRecebido == "LEDR") then
-            gpio.write(LEDR, gpio.OUTPUT);
+            gpio.write(LEDR, gpio.HIGH);
             gpio.write(LEDG, gpio.LOW);
         end
     end)
