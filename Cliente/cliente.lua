@@ -48,15 +48,15 @@ function draw(temp_recebida)
   -- Graus Celsius
   disp:drawCircle(92, 30, 4);
   disp:drawCircle(92, 30, 3);
-  disp:drawHLine(97, 40, 11);
-  disp:drawHLine(96, 41, 13);
-  disp:drawHLine(95, 42, 15);
-  disp:drawVLine(95, 42, 10);
-  disp:drawVLine(96, 41, 12);
-  disp:drawVLine(97, 40, 14);
-  disp:drawHLine(95, 52, 15);
-  disp:drawHLine(96, 53, 13);
-  disp:drawHLine(97, 54, 11);
+  disp:drawHLine(103, 40, 11);
+  disp:drawHLine(102, 41, 13);
+  disp:drawHLine(101, 42, 15);
+  disp:drawVLine(101, 42, 10);
+  disp:drawVLine(102, 41, 12);
+  disp:drawVLine(103, 40, 14);
+  disp:drawHLine(101, 52, 15);
+  disp:drawHLine(102, 53, 13);
+  disp:drawHLine(103, 54, 11);
   disp:drawRFrame(0, 20, 128, 44, 4);
 end
 
