@@ -1,15 +1,10 @@
 -- ESP01
 -- CLIENTE
 
-BUT = 9;
-gpio.mode(BUT, gpio.INT);
-
 wifi.sta.disconnect()
 wifi.setmode(wifi.STATION) 
 wifi.sta.config("ESP","eletromagnetismo")
 wifi.sta.autoconnect(1)
-
-tmr.stop(1);
 
 cl = net.createConnection(net.TCP, 0)
 
@@ -19,15 +14,12 @@ end)
 
 tmr.alarm(0, 1000, 1, function()
     print("Tentando conectar!")
-    
     cl:connect(80,"192.168.4.1")
 end)
 
 cl:on("connection", function(sck,c)
-    init_i2c_display()
     print("Conectado")
     tmr.stop(0)
-    tmr.start(1);
 end)
 
 cl:on("disconnection", function(sck,c)
@@ -49,8 +41,8 @@ function draw(temp_recebida)
 
   print(temp_recebida);
 
-  --escrever_primeiro(string.sub(temp_recebida, 1, 1));
-  --escrever_segundo(string.sub(temp_recebida, 2));
+  escrever_primeiro(string.sub(temp_recebida, 1, 1));
+  escrever_segundo(string.sub(temp_recebida, 2));
 
   -- Graus Celsius
   disp:drawCircle(92, 30, 4);
@@ -108,16 +100,5 @@ function escrever_segundo(segundo)
     end
 end
 
-gpio.trig(BUT, "up", function(level) 
-    print("Mudou para baixo")
-    ON = not ON;
-end)
-
-tmr.alarm(1, 500, 1, function()
-    if (ON == true) then
-        cl:send("LAMP_ON");
-    else
-        cl:send("LAMP_OFF");
-    end
-end)
-
+init_i2c_display()
+display()
