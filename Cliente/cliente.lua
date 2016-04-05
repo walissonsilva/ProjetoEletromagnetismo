@@ -9,6 +9,8 @@ wifi.setmode(wifi.STATION)
 wifi.sta.config("ESP","eletromagnetismo")
 wifi.sta.autoconnect(1)
 
+anterior = tmr.now();
+
 tmr.stop(1);
 
 cl = net.createConnection(net.TCP, 0)
@@ -49,8 +51,8 @@ function draw(temp_recebida)
 
   print(temp_recebida);
 
-  --escrever_primeiro(string.sub(temp_recebida, 1, 1));
-  --escrever_segundo(string.sub(temp_recebida, 2));
+  escrever_primeiro(string.sub(temp_recebida, 1, 1));
+  escrever_segundo(string.sub(temp_recebida, 2));
 
   -- Graus Celsius
   disp:drawCircle(92, 30, 4);
@@ -108,9 +110,13 @@ function escrever_segundo(segundo)
     end
 end
 
-gpio.trig(BUT, "up", function(level) 
-    print("Mudou para baixo")
-    ON = not ON;
+gpio.trig(BUT, "up", function(level)
+    atual = tmr.now();
+    if (atual - anterior > 500000) then
+        anterior = atual;
+        print("Mudou para baixo")
+        ON = not ON;
+    end
 end)
 
 tmr.alarm(1, 500, 1, function()
